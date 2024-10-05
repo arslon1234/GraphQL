@@ -1,5 +1,3 @@
-
-
 import  { useState  } from "react";
 import { Formik, Form, Field, ErrorMessage , FormikProps} from "formik";
 import { useMask } from "@react-input/mask";
@@ -10,11 +8,11 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 
 import {setCookies } from "@coocse"
-import {auth} from "@service-auth"
+// import {auth} from "@service-auth"
 import {signInValidationSchema , signUpValidationSchema } from "@validations"
 import "./style.scss";
 
-const index = () => {
+const Index = () => {
   const navigate = useNavigate();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +32,7 @@ const index = () => {
   //=-=--=-===-=-===-=-=-=
 
   // Custom styling for TextField when there's an error
-const StyledTextField = styled(TextField)(({  }) => ({
+const StyledTextField = styled(TextField)(() => ({
   '& .MuiInputBase-root': {
     color: '#000',
     fontSize: '20px',
@@ -53,52 +51,49 @@ const StyledTextField = styled(TextField)(({  }) => ({
 
 
 
-  //Aftarization -> signin and signup <-=-=-=--=-=-=-==-=-=-=-
+  
   const signUp = async(values:any)=>{
-      // console.log(values);
-      const phone = values.phone_number.replace(/\D/g, "");
-      const usrData = {...values , phone_number: `+${phone}`};
+      console.log(values);
+      // const phone = values.phone_number.replace(/\D/g, "");
+      // const usrData = {...values , phone_number: `+${phone}`};
 
-     try{
-       const res = await auth.signup(usrData);
-      //  console.log(res);
-       if(res.status === 201){
-          toast.success("Adbmin created successfully")
-          setTimeout(()=>{
-            setIsSignUp(false);
-          }, 1000)
-       }
-     }catch(err:any){
-       console.log(err);
-       toast.error("Error " +  err?.message)
-     }
+    //  try{
+    //    const res = await auth.signup(usrData);
+    //    if(res.status === 201){
+    //       toast.success("Adbmin created successfully")
+    //       setTimeout(()=>{
+    //         setIsSignUp(false);
+    //       }, 1000)
+    //    }
+    //  }catch(err:any){
+    //    console.log(err);
+    //    toast.error("Error " +  err?.message)
+    //  }
       
   }
 
   const signIn = async(values:any)=>{
-    const phone = values.phone_number.replace(/\D/g, "");
-    const usrData = {...values , phone_number: `+${phone}`};
+    console.log(values)
+    // const phone = values.phone_number.replace(/\D/g, "");
+    // const usrData = {...values , phone_number: `+${phone}`};
     // console.log(usrData);
     
-    try{
-      const res = await auth.signin(usrData);
-      if(res.status === 201){
-        setCookies("access_token", res?.data?.data?.tokens?.access_token);
-        setCookies("refresh_token", res?.data?.data?.tokens?.refresh_token);
-        setCookies("admin_data", res?.data?.data?.admin);
-        setCookies("admin_id", res?.data?.data?.data?.id);
-
-
-        // setCookies("refresh_token", res?.data?.tokens?.refresh_token);
-        toast.success("Sign in success")
-        setTimeout(()=>{
-            navigate("/home");
-        }, 1000)
-      }
-    }catch(error:any){
-      console.log(error);
-      toast.error("Error " +  error?.message)
-    }
+    // try{
+    //   const res = await auth.signin(usrData);
+    //   if(res.status === 201){
+    //     setCookies("access_token", res?.data?.data?.tokens?.access_token);
+    //     setCookies("refresh_token", res?.data?.data?.tokens?.refresh_token);
+    //     setCookies("admin_data", res?.data?.data?.admin);
+    //     setCookies("admin_id", res?.data?.data?.data?.id);
+    //     toast.success("Sign in success")
+    //     setTimeout(()=>{
+    //         navigate("/home");
+    //     }, 1000)
+    //   }
+    // }catch(error:any){
+    //   console.log(error);
+    //   toast.error("Error " +  error?.message)
+    // }
   }
 
   //=-=-=-=-=-=---=---=--=-=-=-=-=-=-=-=-=-=-=-=---=---=--
@@ -154,7 +149,7 @@ const StyledTextField = styled(TextField)(({  }) => ({
 
                 <Field
                  as={TextField}
-                 label="Telafono"
+                 label="Phone number"
                  type="tel"
                  inputRef={inputRef2}
                  name="phone_number"
@@ -232,10 +227,10 @@ const StyledTextField = styled(TextField)(({  }) => ({
             >
               {({ errors, touched }: FormikProps<any>) => (
               <Form className="w-full flex flex-col gap-[15px]">
-                <h2 className=" text-center text-[#D55200] text-[22px] font-semibold">login</h2>
+                <h2 className=" text-center text-[#D55200] text-[22px] font-semibold">Login</h2>
                 <Field
                  as={TextField}
-                 label="Telafono"
+                 label="Phone number"
                  type="tel"
                  inputRef={inputRef}
                  name="phone_number"
@@ -331,4 +326,4 @@ const StyledTextField = styled(TextField)(({  }) => ({
   );
 };
 
-export default index;
+export default Index;
