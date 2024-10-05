@@ -1,5 +1,5 @@
 import  Auth  from "./auth";
-import Arror from "./error";
+import Error from "./error";
 import Home from "./home";
 import Category from "./category";
 import SubCategory from "./category/subcategory";
@@ -14,7 +14,7 @@ import Banner from "./banner";
 
 export { 
     Auth, 
-    Arror, 
+    Error, 
     Home , 
     Category,
     SubCategory , 
