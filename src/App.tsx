@@ -1,11 +1,9 @@
-import { Outlet } from "react-router-dom";
-
 const App = () => {
   return (
     <div>
-      <Outlet />
+      <h1>Graphql</h1>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
